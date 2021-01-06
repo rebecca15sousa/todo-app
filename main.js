@@ -3,7 +3,7 @@ let allBtn = document.getElementById("allBtn");
 let activeBtn = document.getElementById("activeBtn");
 let completedBtn = document.getElementById("completedBtn");
 
-//adds new item to Active List
+
 // function createItem() {
 //     let newItem = document.createElement("li");
 //     let inputValue = document.getElementById("textInput").value;
@@ -18,10 +18,11 @@ let completedBtn = document.getElementById("completedBtn");
 //     document.getElementById("textInput").value = "";
 // }
 
+//adds new item to Active List
 function createItem() {
     let newItem = document.createElement("input");
     newItem.setAttribute("type", "checkbox");
-    newItem.setAttribute("onchange", "completeItem(this)");
+    newItem.setAttribute("onchange", "checkUncheckItem(this)");
     let inputValue = document.getElementById("textInput").value;
     let itemLabel = document.createElement("label");
     itemLabel.textContent = inputValue;
@@ -62,10 +63,13 @@ completedBtn.onclick = function() {
     document.getElementById("completedList").style.display = "block";
 }
 
-//
-function completeItem(item) {
+//marks/unmarks items as completed
+function checkUncheckItem(item) {
     if (item.checked) {
         document.getElementById("activeList").removeChild(item.parentNode);
         document.getElementById("completedList").appendChild(item.parentNode);
+    } else {
+        document.getElementById("completedList").removeChild(item.parentNode);
+        document.getElementById("activeList").appendChild(item.parentNode);
     }
 }
