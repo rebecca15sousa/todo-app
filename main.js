@@ -4,14 +4,34 @@ let activeBtn = document.getElementById("activeBtn");
 let completedBtn = document.getElementById("completedBtn");
 
 //adds new item to Active List
+// function createItem() {
+//     let newItem = document.createElement("li");
+//     let inputValue = document.getElementById("textInput").value;
+//     newItem.textContent = inputValue;
+//     let checkBtn = document.createElement("button");
+//     if (inputValue === "") {
+//         alert("You must write something!");
+//     } else {
+//         document.getElementById("activeList").appendChild(checkBtn);
+//         document.getElementById("activeList").appendChild(newItem);
+//     }
+//     document.getElementById("textInput").value = "";
+// }
+
 function createItem() {
-    let newItem = document.createElement("li");
+    let newItem = document.createElement("input");
+    newItem.setAttribute("type", "checkbox");
+    newItem.setAttribute("onchange", "completeItem(this)");
     let inputValue = document.getElementById("textInput").value;
-    newItem.textContent = inputValue;
+    let itemLabel = document.createElement("label");
+    itemLabel.textContent = inputValue;
+    let lineBreak = document.createElement("br");
     if (inputValue === "") {
         alert("You must write something!");
     } else {
-        document.getElementById("activeList").appendChild(newItem);
+        itemLabel.prepend(newItem);
+        document.getElementById("activeList").appendChild(itemLabel);
+        itemLabel.appendChild(lineBreak);
     }
     document.getElementById("textInput").value = "";
 }
@@ -40,4 +60,12 @@ completedBtn.onclick = function() {
     //document.getElementById("allList").style.display = "none";
     document.getElementById("activeList").style.display = "none";
     document.getElementById("completedList").style.display = "block";
+}
+
+//
+function completeItem(item) {
+    if (item.checked) {
+        document.getElementById("activeList").removeChild(item.parentNode);
+        document.getElementById("completedList").appendChild(item.parentNode);
+    }
 }
