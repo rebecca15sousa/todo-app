@@ -33,6 +33,7 @@ function createItem() {
     } else {
         itemLabel.prepend(newItem);
         document.getElementById("activeList").appendChild(itemLabel);
+        createDeleteBtn(itemLabel);
         itemLabel.appendChild(lineBreak);
     }
     document.getElementById("textInput").value = "";
@@ -77,5 +78,22 @@ function checkUncheckItem(item) {
         itemLabel.classList.toggle("completedItem");
         document.getElementById("activeList").appendChild(itemLabel);
         itemLabel.classList.toggle("activeItem");
+    }
+}
+
+//creates a delete button for each item
+function createDeleteBtn(itemLabel) {
+    let deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "close";
+    deleteBtn.classList.add("deleteBtn");
+    itemLabel.appendChild(deleteBtn);
+    deleteItem(deleteBtn, itemLabel);
+}
+
+//deletes item from DOM
+function deleteItem(deleteBtn, itemLabel) {
+    deleteBtn.onclick = function() {
+        itemLabel.parentNode.removeChild(itemLabel);
+        console.log("apagou item");
     }
 }
