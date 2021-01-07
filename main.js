@@ -2,6 +2,7 @@ let inputField = document.getElementById("textInput");
 let allBtn = document.getElementById("allBtn");
 let activeBtn = document.getElementById("activeBtn");
 let completedBtn = document.getElementById("completedBtn");
+let clearBtn = document.getElementById("clearBtn");
 
 
 // function createItem() {
@@ -46,7 +47,7 @@ inputField.addEventListener("keyup", function(event) {
     }
 });
 
-//functions to show/hide lists
+//button functions to show/hide lists
 allBtn.onclick = function() {
     //document.getElementById("allList").style.display = "block";
     document.getElementById("activeList").style.display = "block";
@@ -95,5 +96,13 @@ function deleteItem(deleteBtn, itemLabel) {
     deleteBtn.onclick = function() {
         itemLabel.parentNode.removeChild(itemLabel);
         console.log("apagou item");
+    }
+}
+
+//Clear Completed button function
+clearBtn.onclick = function() {
+    let allCompletedItems = document.querySelectorAll(".completedItem");
+    for (let i = 0; i < allCompletedItems.length; i++) {
+        document.getElementById("completedList").removeChild(allCompletedItems[i]);
     }
 }
