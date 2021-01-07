@@ -26,6 +26,7 @@ function createItem() {
     let inputValue = document.getElementById("textInput").value;
     let itemLabel = document.createElement("label");
     itemLabel.textContent = inputValue;
+    itemLabel.classList.add("activeItem");
     let lineBreak = document.createElement("br");
     if (inputValue === "") {
         alert("You must write something!");
@@ -65,11 +66,16 @@ completedBtn.onclick = function() {
 
 //marks/unmarks items as completed
 function checkUncheckItem(item) {
+    let itemLabel = item.parentNode;
     if (item.checked) {
-        document.getElementById("activeList").removeChild(item.parentNode);
-        document.getElementById("completedList").appendChild(item.parentNode);
+        document.getElementById("activeList").removeChild(itemLabel);
+        itemLabel.classList.toggle("activeItem");
+        document.getElementById("completedList").appendChild(itemLabel);
+        itemLabel.classList.toggle("completedItem");
     } else {
-        document.getElementById("completedList").removeChild(item.parentNode);
-        document.getElementById("activeList").appendChild(item.parentNode);
+        document.getElementById("completedList").removeChild(itemLabel);
+        itemLabel.classList.toggle("completedItem");
+        document.getElementById("activeList").appendChild(itemLabel);
+        itemLabel.classList.toggle("activeItem");
     }
 }
