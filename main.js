@@ -36,6 +36,7 @@ function createItem() {
         document.getElementById("activeList").appendChild(itemLabel);
         createDeleteBtn(itemLabel);
         itemLabel.appendChild(lineBreak);
+        countItemsLeft();
     }
     document.getElementById("textInput").value = "";
 }
@@ -74,11 +75,13 @@ function checkUncheckItem(item) {
         itemLabel.classList.toggle("activeItem");
         document.getElementById("completedList").appendChild(itemLabel);
         itemLabel.classList.toggle("completedItem");
+        countItemsLeft();
     } else {
         document.getElementById("completedList").removeChild(itemLabel);
         itemLabel.classList.toggle("completedItem");
         document.getElementById("activeList").appendChild(itemLabel);
         itemLabel.classList.toggle("activeItem");
+        countItemsLeft();
     }
 }
 
@@ -95,7 +98,7 @@ function createDeleteBtn(itemLabel) {
 function deleteItem(deleteBtn, itemLabel) {
     deleteBtn.onclick = function() {
         itemLabel.parentNode.removeChild(itemLabel);
-        console.log("apagou item");
+        countItemsLeft();
     }
 }
 
@@ -105,4 +108,15 @@ clearBtn.onclick = function() {
     for (let i = 0; i < allCompletedItems.length; i++) {
         document.getElementById("completedList").removeChild(allCompletedItems[i]);
     }
+}
+
+//counts how many items are in the Active List
+function countItemsLeft() {
+    let dynamicNumber = document.getElementById("dynamicNumber");
+    let counter = 0;
+    let allActiveItems = document.querySelectorAll(".activeItem");
+    for (let i = 0; i < allActiveItems.length; i++) {
+        counter++;
+    }
+    dynamicNumber.textContent = counter;
 }
