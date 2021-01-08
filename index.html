@@ -9,6 +9,8 @@
   <title>Frontend Mentor | Todo app</title>
 
   <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap" rel="stylesheet">
 
   <!-- <style>
     .attribution { font-size: 11px; text-align: center; }
@@ -17,23 +19,27 @@
 </head>
 <body>
 
-  <h1>Todo</h1>
+  <h1 id="title">TODO</h1>
 
-  <input type="text" id="textInput" placeholder="Title...">
+  <div id="textInputDiv">
+    <input type="text" id="textInput" placeholder="Title...">
+  </div>
 
-  <!-- <ul id="allList"></ul> -->
-  <ul id="activeList"></ul>
-  <ul id="completedList"></ul>
+  <div id="fullListDiv">
+    <!-- <ul id="allList"></ul> -->
+    <ul id="activeList"></ul>
+    <ul id="completedList"></ul>
 
-  <p id="itemsLeftText"><span id="dynamicNumber">0</span> items left</p>
+    <p id="itemsLeftText"><span id="dynamicNumber">0</span> items left</p>
 
-  <button type="button" id="allBtn">All</button>
-  <button type="button" id="activeBtn">Active</button> 
-  <button type="button" id="completedBtn">Completed</button>
+    <button type="button" id="allBtn">All</button>
+    <button type="button" id="activeBtn">Active</button> 
+    <button type="button" id="completedBtn">Completed</button>
 
-  <button type="button" id="clearBtn">Clear Completed</button>
+    <button type="button" id="clearBtn">Clear Completed</button>
+  </div>
 
-  <p>Drag and drop to reorder list</p>
+  <p id="dragDropText">Drag and drop to reorder list</p>
 
   <div class="attribution">
     <p>
