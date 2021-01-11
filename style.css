@@ -15,10 +15,21 @@ body {
 
 #textInputDiv {
     text-align: center;
+    margin: 0 auto;
+    width: 30%;
+    padding: 1%;
+    background-color: hsl(237, 14%, 26%);
+    border-radius: 5px;
 }
 
 #textInput {
-    
+    width: 80%;
+    font-size: 18px;
+    background-color: hsl(237, 14%, 26%);
+    border: none;
+    font-family: 'Josefin Sans';
+    font-weight: 400;
+    color: hsl(0, 0%, 98%);
 }
 
 #fullListDiv {
