@@ -5,12 +5,25 @@ body {
     background-color: hsl(235, 21%, 11%);
 }
 
+#headerDiv {
+    width: 31%;
+    margin: 0 auto;
+}
+
 #title {
     font-family: 'Josefin Sans';
     font-weight: 700;
     font-size: 3vw;
-    text-align: center;
-    color: white;
+    color: hsl(0, 0%, 98%);
+    display: inline-block;
+    letter-spacing: 1vw;
+}
+
+#viewModeIcon {
+    display: inline-block;
+    float: right;
+    margin: 8% 0;
+    cursor: pointer;
 }
 
 #textInputDiv {
