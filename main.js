@@ -21,9 +21,10 @@ let clearBtn = document.getElementById("clearBtn");
 
 //adds new item to Active List
 function createItem() {
-    let newItem = document.createElement("input");
-    newItem.setAttribute("type", "checkbox");
-    newItem.setAttribute("onchange", "checkUncheckItem(this)");
+    let itemCheckbox = document.createElement("input");
+    itemCheckbox.setAttribute("type", "checkbox");
+    itemCheckbox.classList.add("checkbox");
+    itemCheckbox.setAttribute("onchange", "checkUncheckItem(this)");
     let inputValue = document.getElementById("textInput").value;
     let itemLabel = document.createElement("label");
     itemLabel.textContent = inputValue;
@@ -32,7 +33,7 @@ function createItem() {
     if (inputValue === "") {
         alert("You must write something!");
     } else {
-        itemLabel.prepend(newItem);
+        itemLabel.prepend(itemCheckbox);
         document.getElementById("activeList").appendChild(itemLabel);
         createDeleteBtn(itemLabel);
         itemLabel.appendChild(lineBreak);
@@ -88,7 +89,7 @@ function checkUncheckItem(item) {
 //creates a delete button for each item
 function createDeleteBtn(itemLabel) {
     let deleteBtn = document.createElement("button");
-    deleteBtn.textContent = "close";
+    // deleteBtn.textContent = "close";
     deleteBtn.classList.add("deleteBtn");
     itemLabel.appendChild(deleteBtn);
     deleteItem(deleteBtn, itemLabel);
