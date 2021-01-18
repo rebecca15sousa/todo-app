@@ -200,8 +200,21 @@ body {
 
 #dragDropText {
     text-align: center;
+    font-family: 'Josefin Sans';
+    font-size: 14px;
+    font-weight: 400;
+    color: hsl(234, 11%, 52%);
+    margin-top: 3%;
 }
 
 .attribution {
     text-align: center;
+    font-family: 'Josefin Sans';
+    font-size: 14px;
+    font-weight: 400;
+    color: hsl(234, 11%, 52%);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
 }
