@@ -54,18 +54,27 @@ allBtn.onclick = function() {
     //document.getElementById("allList").style.display = "block";
     document.getElementById("activeList").style.display = "block";
     document.getElementById("completedList").style.display = "block";
+    allBtn.setAttribute("aria-pressed", "true");
+    activeBtn.setAttribute("aria-pressed", "false");
+    completedBtn.setAttribute("aria-pressed", "false");
 }
 
 activeBtn.onclick = function() {
     //document.getElementById("allList").style.display = "none";
     document.getElementById("activeList").style.display = "block";
     document.getElementById("completedList").style.display = "none";
+    activeBtn.setAttribute("aria-pressed", "true");
+    allBtn.setAttribute("aria-pressed", "false");
+    completedBtn.setAttribute("aria-pressed", "false");
 }
 
 completedBtn.onclick = function() {
     //document.getElementById("allList").style.display = "none";
     document.getElementById("activeList").style.display = "none";
     document.getElementById("completedList").style.display = "block";
+    completedBtn.setAttribute("aria-pressed", "true");
+    allBtn.setAttribute("aria-pressed", "false");
+    activeBtn.setAttribute("aria-pressed", "false");
 }
 
 //marks/unmarks items as completed
