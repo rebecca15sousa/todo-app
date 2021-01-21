@@ -3,6 +3,9 @@ let allBtn = document.getElementById("allBtn");
 let activeBtn = document.getElementById("activeBtn");
 let completedBtn = document.getElementById("completedBtn");
 let clearBtn = document.getElementById("clearBtn");
+let activeList = document.getElementById("activeList");
+let completedList = document.getElementById("completedList");
+const containers = document.querySelectorAll(".container");
 
 
 // function createItem() {
@@ -29,6 +32,8 @@ function createItem() {
     let itemLabel = document.createElement("label");
     itemLabel.textContent = inputValue;
     itemLabel.classList.add("activeItem");
+    itemLabel.classList.add("draggable");
+    itemLabel.setAttribute("draggable", "true");
     let lineBreak = document.createElement("br");
     if (inputValue === "") {
         alert("You must write something!");
@@ -38,6 +43,8 @@ function createItem() {
         createDeleteBtn(itemLabel);
         itemLabel.appendChild(lineBreak);
         countItemsLeft();
+        itemLabel.addEventListener("dragstart", dragStart);
+        itemLabel.addEventListener("dragend", dragEnd);
     }
     document.getElementById("textInput").value = "";
 }
@@ -129,4 +136,77 @@ function countItemsLeft() {
         counter++;
     }
     dynamicNumber.textContent = counter;
+}
+
+//drag and drop functions for items
+function dragStart(event) {
+    event.target.classList.add("dragging");
+}
+
+function dragEnd(event) {
+    event.target.classList.remove("dragging");
+}
+
+//drag and drop functions for containers
+containers.forEach(dragAndDropCont);
+
+function dragAndDropCont(container) {
+    let afterElement;
+    container.addEventListener("dragenter", dragEnter);
+    container.addEventListener("dragover", dragOver);
+    container.addEventListener("dragleave", dragLeave);
+    container.addEventListener("drop", drop);
+}
+
+function dragEnter(event) {
+    event.preventDefault();
+    event.target.classList.add("dragOver");
+}
+
+function dragOver(event) {
+    event.preventDefault();
+    event.target.classList.add("dragOver");
+    let draggable = document.querySelector(".dragging");
+    let container;
+    if (draggable.classList.contains("activeItem")) {
+        container = activeList;
+    } else {
+        container = completedList;
+    }
+    afterElement = getDragAfterElement(container, event.clientY);
+}
+
+function dragLeave(event) {
+    event.target.classList.remove("dragOver");
+}
+
+function drop(event) {
+    event.target.classList.remove("dragOver");
+    let draggable = document.querySelector(".dragging");
+    if (afterElement == null) {
+        if (draggable.classList.contains("activeItem")) {
+            activeList.appendChild(draggable);
+        } else {
+            completedList.appendChild(draggable);
+        }
+    } else {
+        if (draggable.classList.contains("activeItem")) {
+            activeList.insertBefore(draggable, afterElement);
+        } else {
+            completedList.insertBefore(draggable, afterElement);
+        }    
+    }
+}
+
+function getDragAfterElement(container, y) {
+    let draggableElements = [...container.querySelectorAll(".draggable:not(.dragging)")];
+    return draggableElements.reduce((closest, child) => {
+        let box = child.getBoundingClientRect();
+        let offset = y - box.top - box.height / 2;
+        if (offset < 0 && offset > closest.offset) {
+            return { offset: offset, element: child };
+        } else {
+            return closest;
+        }
+    }, { offset: Number.NEGATIVE_INFINITY }).element;
 }

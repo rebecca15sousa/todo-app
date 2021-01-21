@@ -218,3 +218,14 @@ body {
     left: 0;
     width: 100%;
 }
+
+
+/* drag and drop */
+
+.dragging {
+    opacity: .5;
+}
+
+.dragOver {
+    border: .1em dashed hsl(204, 100%, 45%);
+}
