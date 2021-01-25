@@ -1,3 +1,16 @@
+/* variables */
+
+:root {
+    --background-image: url(images/bg-desktop-dark.jpg);
+    --background-colour: hsl(235, 21%, 11%);
+    --list-colour: hsl(235, 24%, 19%);
+    --active-text-colour: hsl(236, 33%, 92%);
+    --completed-text-colour: hsl(234, 11%, 52%);
+    --buttons-footer-colour: hsl(234, 11%, 52%);
+    --buttons-hover-colour: hsl(236, 33%, 92%);
+    --border-colour: hsl(233, 14%, 35%);
+}
+
 /* checkbox */
 
 .checkbox {
@@ -6,28 +19,24 @@
     position: absolute;
 }
 
-.activeItem:hover {
-    color: hsl(236, 33%, 92%);
-}
-
 .activeItem::before {
     content: '';
     width: 1em;
     height: 1em;
-    border: .05em solid hsl(233, 14%, 35%);
+    border: .05em solid var(--border-colour);
     border-radius: 50%;
     margin-right: .5em;
 }
 
 .activeItem:hover::before {
-    border-color: hsl(195, 100%, 60%);
+    border-color: hsl(192, 100%, 67%);
 }
 
 .completedItem::before {
     content: url(images/icon-check.svg);
     width: 1em;
     height: 1em;
-    background: linear-gradient(to bottom right, hsl(195, 100%, 70%), hsl(270, 100%, 70%));
+    background: linear-gradient(to bottom right, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
     border: .05em solid transparent;
     border-radius: 50%;
     margin-right: .5em;
@@ -45,10 +54,10 @@
 
 
 body {
-    background-image: url(images/bg-desktop-dark.jpg);
+    background-image: var(--background-image);
     background-repeat: no-repeat;
     background-position: center top;
-    background-color: hsl(235, 21%, 11%);
+    background-color: var(--background-colour);
 }
 
 #headerDiv {
@@ -77,45 +86,37 @@ body {
     margin: 0 auto;
     width: 30%;
     padding: 1%;
-    background-color: hsl(235, 24%, 19%);
+    background-color: var(--list-colour);
     border-radius: 5px;
 }
 
 #textInput {
     width: 80%;
     font-size: 18px;
-    background-color: hsl(235, 24%, 19%);
+    background-color: var(--list-colour);
     border: none;
     font-family: 'Josefin Sans';
     font-weight: 400;
-    color: hsl(234, 39%, 85%);
+    color: var(--active-text-colour);
 }
 
 #fullListDiv {
     margin: 1.5% auto;
     width: 32%;
-    background-color: hsl(235, 24%, 19%);
+    background-color: var(--list-colour);
     border-radius: 5px;
-}
-
-#activeList {
-
-}
-
-#completedList {
-
 }
 
 .activeItem {
     font-family: 'Josefin Sans';
     font-weight: 400;
     font-size: 18px;
-    color: hsl(234, 39%, 85%);
+    color: var(--active-text-colour);
     display: flex;
     align-items: center;
     cursor: pointer;
     padding: 3% 4%;
-    border-bottom: .05em solid hsl(233, 14%, 35%);
+    border-bottom: .05em solid var(--border-colour);
 }
 
 .completedItem {
@@ -123,12 +124,12 @@ body {
     font-weight: 400;
     font-size: 18px;
     text-decoration: line-through;
-    color: hsl(234, 11%, 52%);
+    color: var(--completed-text-colour);
     display: flex;
     align-items: center;
     cursor: pointer;
     padding: 3% 4%;
-    border-bottom: .05em solid hsl(233, 14%, 35%);
+    border-bottom: .05em solid var(--border-colour);
 }
 
 .deleteBtn {
@@ -159,7 +160,7 @@ body {
     font-family: 'Josefin Sans';
     font-weight: 400;
     font-size: 14px;
-    color: hsl(234, 11%, 52%);
+    color: var(--buttons-footer-colour);
 }
 
 #listButtonsDiv {
@@ -168,34 +169,34 @@ body {
 
 .footerBtn {
     font-family: 'Josefin Sans';
-    font-weight: 400;
+    font-weight: 700;
     font-size: 14px;
-    color: hsl(234, 11%, 52%);
+    color: var(--buttons-footer-colour);
     background-color: transparent;
     border: none;
     cursor: pointer;
 }
 
 .footerBtn:hover {
-    color: hsl(236, 33%, 92%);
+    color: var(--buttons-hover-colour);
 }
 
 [aria-pressed="true"] {
-    color: hsl(204, 100%, 45%);
+    color: hsl(220, 98%, 61%);
 }
 
 #clearBtn {
     font-family: 'Josefin Sans';
     font-weight: 400;
     font-size: 14px;
-    color: hsl(234, 11%, 52%);
+    color: var(--buttons-footer-colour);
     background-color: transparent;
     border: none;
     cursor: pointer;
 }
 
 #clearBtn:hover {
-    color: hsl(236, 33%, 92%);
+    color: var(--buttons-hover-colour);
 }
 
 #dragDropText {
@@ -203,7 +204,7 @@ body {
     font-family: 'Josefin Sans';
     font-size: 14px;
     font-weight: 400;
-    color: hsl(234, 11%, 52%);
+    color: var(--buttons-footer-colour);
     margin-top: 3%;
 }
 
@@ -212,13 +213,16 @@ body {
     font-family: 'Josefin Sans';
     font-size: 14px;
     font-weight: 400;
-    color: hsl(234, 11%, 52%);
+    color: var(--buttons-footer-colour);
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
 }
 
+a.attribution {
+    color: hsl(228, 45%, 44%);
+}
 
 /* drag and drop */
 
@@ -227,5 +231,5 @@ body {
 }
 
 .dragOver {
-    border: .1em dashed hsl(204, 100%, 45%);
+    border: .1em dashed hsl(220, 98%, 61%);
 }

@@ -8,19 +8,38 @@ let completedList = document.getElementById("completedList");
 const containers = document.querySelectorAll(".container");
 
 
-// function createItem() {
-//     let newItem = document.createElement("li");
-//     let inputValue = document.getElementById("textInput").value;
-//     newItem.textContent = inputValue;
-//     let checkBtn = document.createElement("button");
-//     if (inputValue === "") {
-//         alert("You must write something!");
-//     } else {
-//         document.getElementById("activeList").appendChild(checkBtn);
-//         document.getElementById("activeList").appendChild(newItem);
-//     }
-//     document.getElementById("textInput").value = "";
-// }
+
+//toggle between light and dark mode
+document.getElementById("viewModeIcon").addEventListener("click", function(event) {
+    if (document.getElementById("viewModeIcon").classList.contains("darkMode")) {
+        document.documentElement.style.setProperty("--background-image", "url(images/bg-desktop-light.jpg)");
+        document.documentElement.style.setProperty("--background-colour", "hsl(236, 33%, 92%)");
+        document.documentElement.style.setProperty("--list-colour", "hsl(0, 0%, 98%)");
+        document.documentElement.style.setProperty("--active-text-colour", "hsl(235, 19%, 35%)");
+        document.documentElement.style.setProperty("--completed-text-colour", "hsl(233, 11%, 84%)");
+        document.documentElement.style.setProperty("--buttons-footer-colour", "hsl(236, 9%, 61%)");
+        document.documentElement.style.setProperty("--buttons-hover-colour", "hsl(235, 19%, 35%)");
+        document.documentElement.style.setProperty("--border-colour", "hsl(233, 11%, 84%)");
+        document.getElementById("viewModeIcon").src = "images/icon-moon.svg";
+        document.getElementById("viewModeIcon").classList.remove("darkMode");
+        document.getElementById("viewModeIcon").classList.add("lightMode");
+    } else {
+        document.documentElement.style.setProperty("--background-image", "url(images/bg-desktop-dark.jpg)");
+        document.documentElement.style.setProperty("--background-colour", "hsl(235, 21%, 11%)");
+        document.documentElement.style.setProperty("--list-colour", "hsl(235, 24%, 19%)");
+        document.documentElement.style.setProperty("--active-text-colour", "hsl(234, 39%, 85%)");
+        document.documentElement.style.setProperty("--completed-text-colour", "hsl(234, 11%, 52%)");
+        document.documentElement.style.setProperty("--buttons-footer-colour", "hsl(234, 11%, 52%)");
+        document.documentElement.style.setProperty("--buttons-hover-colour", "hsl(236, 33%, 92%)");
+        document.documentElement.style.setProperty("--border-colour", "hsl(233, 14%, 35%)");
+        document.getElementById("viewModeIcon").src = "images/icon-sun.svg";
+        document.getElementById("viewModeIcon").classList.remove("lightMode");
+        document.getElementById("viewModeIcon").classList.add("darkMode");
+    }
+});
+
+
+
 
 //adds new item to Active List
 function createItem() {
