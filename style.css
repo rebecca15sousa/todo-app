@@ -2,6 +2,7 @@
 
 :root {
     --background-image: url(images/bg-desktop-dark.jpg);
+    --background-image-mobile: url(images/bg-mobile-dark.jpg);
     --background-colour: hsl(235, 21%, 11%);
     --list-colour: hsl(235, 24%, 19%);
     --active-text-colour: hsl(236, 33%, 92%);
@@ -9,6 +10,7 @@
     --buttons-footer-colour: hsl(234, 11%, 52%);
     --buttons-hover-colour: hsl(236, 33%, 92%);
     --border-colour: hsl(233, 14%, 35%);
+    font-size: 18px;
 }
 
 /* checkbox */
@@ -45,13 +47,7 @@
     align-items: center;
 }
 
-
-
-
-
-
-
-
+/* for desktop */
 
 body {
     background-image: var(--background-image);
@@ -68,23 +64,23 @@ body {
 #title {
     font-family: 'Josefin Sans';
     font-weight: 700;
-    font-size: 3vw;
+    font-size: 2rem;
     color: hsl(0, 0%, 98%);
     display: inline-block;
-    letter-spacing: 1vw;
+    letter-spacing: 1rem;
 }
 
 #viewModeIcon {
     display: inline-block;
     float: right;
-    margin: 8% 0;
+    margin: 4% 0;
     cursor: pointer;
 }
 
 #textInputDiv {
     text-align: center;
     margin: 0 auto;
-    width: 30%;
+    width: 30vw;
     padding: 1%;
     background-color: var(--list-colour);
     border-radius: 5px;
@@ -92,7 +88,7 @@ body {
 
 #textInput {
     width: 80%;
-    font-size: 18px;
+    font-size: 1rem;
     background-color: var(--list-colour);
     border: none;
     font-family: 'Josefin Sans';
@@ -101,8 +97,8 @@ body {
 }
 
 #fullListDiv {
-    margin: 1.5% auto;
-    width: 32%;
+    margin: 1.5vw auto;
+    width: 32vw;
     background-color: var(--list-colour);
     border-radius: 5px;
 }
@@ -110,7 +106,7 @@ body {
 .activeItem {
     font-family: 'Josefin Sans';
     font-weight: 400;
-    font-size: 18px;
+    font-size: 1rem;
     color: var(--active-text-colour);
     display: flex;
     align-items: center;
@@ -122,7 +118,7 @@ body {
 .completedItem {
     font-family: 'Josefin Sans';
     font-weight: 400;
-    font-size: 18px;
+    font-size: 1rem;
     text-decoration: line-through;
     color: var(--completed-text-colour);
     display: flex;
@@ -135,7 +131,7 @@ body {
 .deleteBtn {
     cursor: pointer;
     margin-left: auto;
-    padding: 10px;
+    padding: 1%;
     opacity: 0;
     border: .05em solid;
 }
@@ -159,7 +155,7 @@ body {
 #itemsLeftText {
     font-family: 'Josefin Sans';
     font-weight: 400;
-    font-size: 14px;
+    font-size: .8rem;
     color: var(--buttons-footer-colour);
 }
 
@@ -167,10 +163,14 @@ body {
     display: flex;
 }
 
+#listButtonsDivMobile {
+    display: none;
+}
+
 .footerBtn {
     font-family: 'Josefin Sans';
     font-weight: 700;
-    font-size: 14px;
+    font-size: .8rem;
     color: var(--buttons-footer-colour);
     background-color: transparent;
     border: none;
@@ -188,7 +188,7 @@ body {
 #clearBtn {
     font-family: 'Josefin Sans';
     font-weight: 400;
-    font-size: 14px;
+    font-size: .8rem;
     color: var(--buttons-footer-colour);
     background-color: transparent;
     border: none;
@@ -202,7 +202,7 @@ body {
 #dragDropText {
     text-align: center;
     font-family: 'Josefin Sans';
-    font-size: 14px;
+    font-size: .8rem;
     font-weight: 400;
     color: var(--buttons-footer-colour);
     margin-top: 3%;
@@ -211,7 +211,7 @@ body {
 .attribution {
     text-align: center;
     font-family: 'Josefin Sans';
-    font-size: 14px;
+    font-size: .8rem;
     font-weight: 400;
     color: var(--buttons-footer-colour);
     position: fixed;
@@ -221,7 +221,7 @@ body {
 }
 
 a.attribution {
-    color: hsl(228, 45%, 44%);
+    color: hsl(220, 98%, 61%);
 }
 
 /* drag and drop */
@@ -232,4 +232,112 @@ a.attribution {
 
 .dragOver {
     border: .1em dashed hsl(220, 98%, 61%);
+}
+
+/* for mobile */
+
+@media only screen and (max-width: 375px) {
+    body {
+        background-image: var(--background-image-mobile);
+    }
+
+    #headerDiv {
+        width: 90vw;
+        margin: 3vh auto 2vh;
+    }
+
+    #title {
+        font-size: 8vw;
+        letter-spacing: 3vw;
+    }
+
+    #viewModeIcon {
+        margin: 6% 0;
+    }
+
+    #textInputDiv {
+        width: 83vw;
+        padding: 4vw 3vw;
+    }
+
+    #textInput {
+        font-size: .8rem;
+    }
+
+    #fullListDiv {
+        width: 89vw;
+        margin: 5vw auto;
+    }
+
+    .activeItem::before {
+        width: 1.3em;
+        height: 1.3em;
+    }
+
+    .activeItem {
+        padding: 5% 6%;
+        font-size: .8rem;
+    }
+
+    .completedItem::before {
+        width: 1.3em;
+        height: 1.3em;
+    }
+
+    .completedItem {
+        padding: 5% 6%;
+        font-size: .8rem;
+    }
+
+    .deleteBtn {
+        background-image: url(images/icon-cross.svg);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-color: transparent;
+        border: .05em solid transparent;
+        opacity: 100;
+        width: 1em;
+        height: 1em;
+    }
+
+    #listFooterDiv {
+        justify-content: space-between;
+        padding: 2% 5%;
+    }
+
+    #itemsLeftText {
+        font-size: .7rem;
+    }
+
+    #clearBtn {
+        font-size: .7rem;
+    }
+
+    #listButtonsDiv {
+        display: none;
+    }
+
+    #listButtonsDivMobile {
+        display: flex;
+        align-items: baseline;
+        justify-content: center;
+        background-color: var(--list-colour);
+        border-radius: 5px;
+        width: 89vw;
+        margin: 5vw auto;
+        padding: 4vw 0;
+    }
+
+    .footerBtn {
+
+    }
+
+    #dragDropText {
+        margin-top: 5vh;
+        font-size: .7rem;
+    }
+
+    .attribution {
+        font-size: .7rem;
+    }
 }

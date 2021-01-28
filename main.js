@@ -1,18 +1,17 @@
 let inputField = document.getElementById("textInput");
-let allBtn = document.getElementById("allBtn");
-let activeBtn = document.getElementById("activeBtn");
-let completedBtn = document.getElementById("completedBtn");
+let allBtn = document.querySelectorAll(".allBtn");
+let activeBtn = document.querySelectorAll(".activeBtn");
+let completedBtn = document.querySelectorAll(".completedBtn");
 let clearBtn = document.getElementById("clearBtn");
 let activeList = document.getElementById("activeList");
 let completedList = document.getElementById("completedList");
 const containers = document.querySelectorAll(".container");
 
-
-
 //toggle between light and dark mode
 document.getElementById("viewModeIcon").addEventListener("click", function(event) {
     if (document.getElementById("viewModeIcon").classList.contains("darkMode")) {
         document.documentElement.style.setProperty("--background-image", "url(images/bg-desktop-light.jpg)");
+        document.documentElement.style.setProperty("--background-image-mobile", "url(images/bg-mobile-light.jpg)");
         document.documentElement.style.setProperty("--background-colour", "hsl(236, 33%, 92%)");
         document.documentElement.style.setProperty("--list-colour", "hsl(0, 0%, 98%)");
         document.documentElement.style.setProperty("--active-text-colour", "hsl(235, 19%, 35%)");
@@ -25,6 +24,7 @@ document.getElementById("viewModeIcon").addEventListener("click", function(event
         document.getElementById("viewModeIcon").classList.add("lightMode");
     } else {
         document.documentElement.style.setProperty("--background-image", "url(images/bg-desktop-dark.jpg)");
+        document.documentElement.style.setProperty("--background-image-mobile", "url(images/bg-mobile-dark.jpg)");
         document.documentElement.style.setProperty("--background-colour", "hsl(235, 21%, 11%)");
         document.documentElement.style.setProperty("--list-colour", "hsl(235, 24%, 19%)");
         document.documentElement.style.setProperty("--active-text-colour", "hsl(234, 39%, 85%)");
@@ -37,9 +37,6 @@ document.getElementById("viewModeIcon").addEventListener("click", function(event
         document.getElementById("viewModeIcon").classList.add("darkMode");
     }
 });
-
-
-
 
 //adds new item to Active List
 function createItem() {
@@ -76,32 +73,47 @@ inputField.addEventListener("keyup", function(event) {
 });
 
 //button functions to show/hide lists
-allBtn.onclick = function() {
-    //document.getElementById("allList").style.display = "block";
-    document.getElementById("activeList").style.display = "block";
-    document.getElementById("completedList").style.display = "block";
-    allBtn.setAttribute("aria-pressed", "true");
-    activeBtn.setAttribute("aria-pressed", "false");
-    completedBtn.setAttribute("aria-pressed", "false");
-}
+allBtn.forEach((btn) => {
+    btn.onclick = function() {
+        document.getElementById("activeList").style.display = "block";
+        document.getElementById("completedList").style.display = "block";
+        btn.setAttribute("aria-pressed", "true");
+        activeBtn.forEach((btn) => {
+            btn.setAttribute("aria-pressed", "false");
+        });
+        completedBtn.forEach((btn) => {
+            btn.setAttribute("aria-pressed", "false");
+        });
+    }
+});
 
-activeBtn.onclick = function() {
-    //document.getElementById("allList").style.display = "none";
-    document.getElementById("activeList").style.display = "block";
-    document.getElementById("completedList").style.display = "none";
-    activeBtn.setAttribute("aria-pressed", "true");
-    allBtn.setAttribute("aria-pressed", "false");
-    completedBtn.setAttribute("aria-pressed", "false");
-}
+activeBtn.forEach((btn) => {
+    btn.onclick = function() {
+        document.getElementById("activeList").style.display = "block";
+        document.getElementById("completedList").style.display = "none";
+        btn.setAttribute("aria-pressed", "true");
+        allBtn.forEach((btn) => {
+            btn.setAttribute("aria-pressed", "false");
+        });
+        completedBtn.forEach((btn) => {
+            btn.setAttribute("aria-pressed", "false");
+        });
+    }
+});
 
-completedBtn.onclick = function() {
-    //document.getElementById("allList").style.display = "none";
-    document.getElementById("activeList").style.display = "none";
-    document.getElementById("completedList").style.display = "block";
-    completedBtn.setAttribute("aria-pressed", "true");
-    allBtn.setAttribute("aria-pressed", "false");
-    activeBtn.setAttribute("aria-pressed", "false");
-}
+completedBtn.forEach((btn) => {
+    btn.onclick = function() {
+        document.getElementById("activeList").style.display = "none";
+        document.getElementById("completedList").style.display = "block";
+        btn.setAttribute("aria-pressed", "true");
+        allBtn.forEach((btn) => {
+            btn.setAttribute("aria-pressed", "false");
+        });
+        activeBtn.forEach((btn) => {
+            btn.setAttribute("aria-pressed", "false");
+        });
+    }
+});
 
 //marks/unmarks items as completed
 function checkUncheckItem(item) {

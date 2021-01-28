@@ -21,7 +21,7 @@
   </div>
 
   <div id="textInputDiv">
-    <input type="text" id="textInput" placeholder="Title...">
+    <input type="text" id="textInput" placeholder="Create a new todo...">
   </div>
 
   <div id="fullListDiv">
@@ -32,13 +32,19 @@
       <p id="itemsLeftText"><span id="dynamicNumber">0</span> items left</p>
 
       <div id="listButtonsDiv">
-        <button type="button" id="allBtn" class="footerBtn" aria-pressed="true">All</button>
-        <button type="button" id="activeBtn" class="footerBtn" aria-pressed="false">Active</button> 
-        <button type="button" id="completedBtn" class="footerBtn" aria-pressed="false">Completed</button>
+        <button type="button" class="footerBtn allBtn" aria-pressed="true">All</button>
+        <button type="button" class="footerBtn activeBtn" aria-pressed="false">Active</button> 
+        <button type="button" class="footerBtn completedBtn" aria-pressed="false">Completed</button>
       </div>
 
       <button type="button" id="clearBtn">Clear Completed</button>
     </div>
+  </div>
+
+  <div id="listButtonsDivMobile">
+    <button type="button" class="footerBtn allBtn" aria-pressed="true">All</button>
+    <button type="button" class="footerBtn activeBtn" aria-pressed="false">Active</button> 
+    <button type="button" class="footerBtn completedBtn" aria-pressed="false">Completed</button>
   </div>
 
   <p id="dragDropText">Drag and drop to reorder list</p>
