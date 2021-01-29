@@ -114,6 +114,10 @@ body {
     border-bottom: .05em solid var(--border-colour);
 }
 
+.activeItem:focus-within {
+    border-bottom: .05em solid hsl(220, 98%, 61%);
+}
+
 .completedItem {
     font-family: 'Josefin Sans';
     font-weight: 400;
@@ -127,6 +131,10 @@ body {
     border-bottom: .05em solid var(--border-colour);
 }
 
+.completedItem:focus-within {
+    border-bottom: .05em solid hsl(220, 98%, 61%);
+}
+
 .deleteBtn {
     cursor: pointer;
     margin-left: auto;
@@ -137,7 +145,7 @@ body {
     height: 2em;
 }
 
-.activeItem:hover > .deleteBtn, .completedItem:hover > .deleteBtn {
+.activeItem:hover > .deleteBtn, .completedItem:hover > .deleteBtn, .deleteBtn:focus {
     background-image: url(images/icon-cross.svg);
     background-repeat: no-repeat;
     background-position: center;
