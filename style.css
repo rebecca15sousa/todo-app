@@ -54,6 +54,8 @@ body {
     background-repeat: no-repeat;
     background-position: center top;
     background-color: var(--background-colour);
+    position: relative;
+    min-height: 100vh;
 }
 
 #headerDiv {
@@ -214,7 +216,8 @@ body {
     font-size: .8rem;
     font-weight: 400;
     color: var(--buttons-footer-colour);
-    margin-top: 3%;
+    margin-top: 3vw;
+    padding-bottom: .8rem;
 }
 
 .attribution {
@@ -223,10 +226,10 @@ body {
     font-size: .8rem;
     font-weight: 400;
     color: var(--buttons-footer-colour);
-    position: fixed;
+    position: absolute;
     bottom: 0;
-    left: 0;
     width: 100%;
+    height: .8rem;
 }
 
 a.attribution {
