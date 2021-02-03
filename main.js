@@ -1,10 +1,10 @@
-let inputField = document.getElementById("textInput");
-let allBtn = document.querySelectorAll(".allBtn");
-let activeBtn = document.querySelectorAll(".activeBtn");
-let completedBtn = document.querySelectorAll(".completedBtn");
-let clearBtn = document.getElementById("clearBtn");
-let activeList = document.getElementById("activeList");
-let completedList = document.getElementById("completedList");
+const inputField = document.getElementById("textInput");
+const allBtn = document.querySelectorAll(".allBtn");
+const activeBtn = document.querySelectorAll(".activeBtn");
+const completedBtn = document.querySelectorAll(".completedBtn");
+const clearBtn = document.getElementById("clearBtn");
+const activeList = document.getElementById("activeList");
+const completedList = document.getElementById("completedList");
 const containers = document.querySelectorAll(".container");
 
 //toggle between light and dark mode
@@ -55,7 +55,7 @@ function createItem() {
         alert("You must write something!");
     } else {
         itemLabel.prepend(itemCheckbox);
-        document.getElementById("activeList").appendChild(itemLabel);
+        activeList.appendChild(itemLabel);
         createDeleteBtn(itemLabel);
         itemLabel.appendChild(lineBreak);
         countItemsLeft();
@@ -75,8 +75,8 @@ inputField.addEventListener("keyup", function(event) {
 //button functions to show/hide lists
 allBtn.forEach((btn) => {
     btn.onclick = function() {
-        document.getElementById("activeList").style.display = "block";
-        document.getElementById("completedList").style.display = "block";
+        activeList.style.display = "block";
+        completedList.style.display = "block";
         btn.setAttribute("aria-pressed", "true");
         activeBtn.forEach((btn) => {
             btn.setAttribute("aria-pressed", "false");
@@ -89,8 +89,8 @@ allBtn.forEach((btn) => {
 
 activeBtn.forEach((btn) => {
     btn.onclick = function() {
-        document.getElementById("activeList").style.display = "block";
-        document.getElementById("completedList").style.display = "none";
+        activeList.style.display = "block";
+        completedList.style.display = "none";
         btn.setAttribute("aria-pressed", "true");
         allBtn.forEach((btn) => {
             btn.setAttribute("aria-pressed", "false");
@@ -103,8 +103,8 @@ activeBtn.forEach((btn) => {
 
 completedBtn.forEach((btn) => {
     btn.onclick = function() {
-        document.getElementById("activeList").style.display = "none";
-        document.getElementById("completedList").style.display = "block";
+        activeList.style.display = "none";
+        completedList.style.display = "block";
         btn.setAttribute("aria-pressed", "true");
         allBtn.forEach((btn) => {
             btn.setAttribute("aria-pressed", "false");
@@ -119,15 +119,15 @@ completedBtn.forEach((btn) => {
 function checkUncheckItem(item) {
     let itemLabel = item.parentNode;
     if (item.checked) {
-        document.getElementById("activeList").removeChild(itemLabel);
+        activeList.removeChild(itemLabel);
         itemLabel.classList.toggle("activeItem");
-        document.getElementById("completedList").appendChild(itemLabel);
+        completedList.appendChild(itemLabel);
         itemLabel.classList.toggle("completedItem");
         countItemsLeft();
     } else {
-        document.getElementById("completedList").removeChild(itemLabel);
+        completedList.removeChild(itemLabel);
         itemLabel.classList.toggle("completedItem");
-        document.getElementById("activeList").appendChild(itemLabel);
+        activeList.appendChild(itemLabel);
         itemLabel.classList.toggle("activeItem");
         countItemsLeft();
     }
@@ -154,7 +154,7 @@ function deleteItem(deleteBtn, itemLabel) {
 clearBtn.onclick = function() {
     let allCompletedItems = document.querySelectorAll(".completedItem");
     for (let i = 0; i < allCompletedItems.length; i++) {
-        document.getElementById("completedList").removeChild(allCompletedItems[i]);
+        completedList.removeChild(allCompletedItems[i]);
     }
 }
 
