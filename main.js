@@ -44,7 +44,7 @@ function createItem() {
     itemCheckbox.setAttribute("type", "checkbox");
     itemCheckbox.classList.add("checkbox");
     itemCheckbox.setAttribute("onchange", "checkUncheckItem(this)");
-    let inputValue = document.getElementById("textInput").value;
+    let inputValue = inputField.value;
     let itemLabel = document.createElement("label");
     itemLabel.textContent = inputValue;
     itemLabel.classList.add("activeItem");
@@ -62,7 +62,7 @@ function createItem() {
         itemLabel.addEventListener("dragstart", dragStart);
         itemLabel.addEventListener("dragend", dragEnd);
     }
-    document.getElementById("textInput").value = "";
+    inputField.value = "";
 }
 
 //event listener for "Enter" key when typing in input field
