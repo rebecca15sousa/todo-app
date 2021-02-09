@@ -6,6 +6,27 @@ const clearBtn = document.getElementById("clearBtn");
 const activeList = document.getElementById("activeList");
 const completedList = document.getElementById("completedList");
 const containers = document.querySelectorAll(".container");
+let itemsActiveArray = [];
+let itemsCompletedArray = [];
+
+//checks if local storage already exists
+if (localStorage.getItem("itemsActive")) {
+    itemsActiveArray = JSON.parse(localStorage.getItem("itemsActive"));
+} else {
+    itemsActiveArray = [];
+}
+
+if (localStorage.getItem("itemsCompleted")) {
+    itemsCompletedArray = JSON.parse(localStorage.getItem("itemsCompleted"));
+} else {
+    itemsCompletedArray = [];
+}
+
+//creates local storage keys and converts its content into a variable
+localStorage.setItem("itemsActive", JSON.stringify(itemsActiveArray));
+const dataActive = JSON.parse(localStorage.getItem("itemsActive"));
+localStorage.setItem("itemsCompleted", JSON.stringify(itemsCompletedArray));
+const dataCompleted = JSON.parse(localStorage.getItem("itemsCompleted"));
 
 //toggle between light and dark mode
 document.getElementById("viewModeIcon").addEventListener("click", function(event) {
@@ -38,38 +59,64 @@ document.getElementById("viewModeIcon").addEventListener("click", function(event
     }
 });
 
-//adds new item to Active List
-function createItem() {
+//creates new item
+function createItem(inputValue) {
     let itemCheckbox = document.createElement("input");
     itemCheckbox.setAttribute("type", "checkbox");
     itemCheckbox.classList.add("checkbox");
     itemCheckbox.setAttribute("onchange", "checkUncheckItem(this)");
-    let inputValue = inputField.value;
     let itemLabel = document.createElement("label");
     itemLabel.textContent = inputValue;
-    itemLabel.classList.add("activeItem");
+    // itemLabel.classList.add("activeItem");
     itemLabel.classList.add("draggable");
     itemLabel.setAttribute("draggable", "true");
     let lineBreak = document.createElement("br");
-    if (inputValue === "") {
-        alert("You must write something!");
-    } else {
-        itemLabel.prepend(itemCheckbox);
-        activeList.appendChild(itemLabel);
-        createDeleteBtn(itemLabel);
-        itemLabel.appendChild(lineBreak);
-        countItemsLeft();
-        itemLabel.addEventListener("dragstart", dragStart);
-        itemLabel.addEventListener("dragend", dragEnd);
-    }
-    inputField.value = "";
+    itemLabel.prepend(itemCheckbox);
+    // activeList.appendChild(itemLabel);
+    createDeleteBtn(itemLabel);
+    itemLabel.appendChild(lineBreak);
+    countItemsLeft();
+    itemLabel.addEventListener("dragstart", dragStart);
+    itemLabel.addEventListener("dragend", dragEnd);
+    return itemLabel;
+}
+
+//adds item to Active List
+function addItemActive(itemLabel) {
+    itemLabel.classList.add("activeItem");
+    activeList.appendChild(itemLabel);
+}
+
+//adds item to Completed List
+function addItemCompleted(itemLabel) {
+    itemLabel.classList.add("completedItem");
+    completedList.appendChild(itemLabel);
 }
 
 //event listener for "Enter" key when typing in input field
 inputField.addEventListener("keyup", function(event) {
     if (event.key === "Enter") {
-        createItem();
+        if (inputField.value === "") {
+            alert("You must write something!");
+        } else {
+            itemsActiveArray.push(inputField.value);
+            localStorage.setItem("itemsActive", JSON.stringify(itemsActiveArray));
+            let itemLabel = createItem(inputField.value);
+            addItemActive(itemLabel);
+            inputField.value = "";
+        }
     }
+});
+
+//displays localStorage data on the front-end
+dataActive.forEach((item) => {
+    let itemLabel = createItem(item);
+    addItemActive(itemLabel);
+});
+
+dataCompleted.forEach((item) => {
+    let itemLabel = createItem(item);
+    addItemCompleted(itemLabel);
 });
 
 //button functions to show/hide lists
@@ -119,14 +166,24 @@ completedBtn.forEach((btn) => {
 function checkUncheckItem(item) {
     let itemLabel = item.parentNode;
     if (item.checked) {
+        let index = itemsActiveArray.indexOf(itemLabel.textContent);
+        itemsActiveArray.splice(index, 1);
+        localStorage.setItem("itemsActive", JSON.stringify(itemsActiveArray));
         activeList.removeChild(itemLabel);
         itemLabel.classList.toggle("activeItem");
+        itemsCompletedArray.push(itemLabel.textContent);
+        localStorage.setItem("itemsCompleted", JSON.stringify(itemsCompletedArray));
         completedList.appendChild(itemLabel);
         itemLabel.classList.toggle("completedItem");
         countItemsLeft();
     } else {
+        let index = itemsCompletedArray.indexOf(itemLabel.textContent);
+        itemsCompletedArray.splice(index, 1);
+        localStorage.setItem("itemsCompleted", JSON.stringify(itemsCompletedArray));
         completedList.removeChild(itemLabel);
         itemLabel.classList.toggle("completedItem");
+        itemsActiveArray.push(itemLabel.textContent);
+        localStorage.setItem("itemsActive", JSON.stringify(itemsActiveArray));
         activeList.appendChild(itemLabel);
         itemLabel.classList.toggle("activeItem");
         countItemsLeft();
@@ -136,23 +193,45 @@ function checkUncheckItem(item) {
 //creates a delete button for each item
 function createDeleteBtn(itemLabel) {
     let deleteBtn = document.createElement("button");
-    // deleteBtn.textContent = "close";
     deleteBtn.classList.add("deleteBtn");
     itemLabel.appendChild(deleteBtn);
     deleteItem(deleteBtn, itemLabel);
 }
 
-//deletes item from DOM
+//deletes item
 function deleteItem(deleteBtn, itemLabel) {
     deleteBtn.onclick = function() {
-        itemLabel.parentNode.removeChild(itemLabel);
-        countItemsLeft();
+        if (itemLabel.classList.contains("activeItem")) {
+            for (let i = 0; i < itemsActiveArray.length; i++) {
+                let value = itemsActiveArray[i];
+                if (value == itemLabel.textContent) {
+                    itemsActiveArray.splice(i, 1);
+                    localStorage.setItem("itemsActive", JSON.stringify(itemsActiveArray));
+                    itemLabel.parentNode.removeChild(itemLabel);
+                    countItemsLeft();
+                    break;
+                }
+            }
+        } else {
+            for (let i = 0; i < itemsCompletedArray.length; i++) {
+                let value = itemsCompletedArray[i];
+                if (value == itemLabel.textContent) {
+                    itemsCompletedArray.splice(i, 1);
+                    localStorage.setItem("itemsCompleted", JSON.stringify(itemsCompletedArray));
+                    itemLabel.parentNode.removeChild(itemLabel);
+                    countItemsLeft();
+                    break;
+                }
+            }
+        }
     }
 }
 
 //Clear Completed button function
 clearBtn.onclick = function() {
     let allCompletedItems = document.querySelectorAll(".completedItem");
+    localStorage.removeItem("itemsCompleted");
+    itemsCompletedArray = [];
     for (let i = 0; i < allCompletedItems.length; i++) {
         completedList.removeChild(allCompletedItems[i]);
     }
