@@ -32,7 +32,7 @@
 }
 
 .activeItem:hover::before {
-    border-color: hsl(192, 100%, 67%);
+    border-color: hsl(220, 98%, 61%);
 }
 
 .completedItem::before {
