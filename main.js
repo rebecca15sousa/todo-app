@@ -40,6 +40,7 @@ document.getElementById("viewModeIcon").addEventListener("click", function(event
         document.documentElement.style.setProperty("--buttons-footer-colour", "hsl(236, 9%, 61%)");
         document.documentElement.style.setProperty("--buttons-hover-colour", "hsl(235, 19%, 35%)");
         document.documentElement.style.setProperty("--border-colour", "hsl(233, 11%, 84%)");
+        document.documentElement.style.setProperty("--box-shadow", "rgb(153 153 153 / 30%)");
         document.getElementById("viewModeIcon").src = "images/icon-moon.svg";
         document.getElementById("viewModeIcon").classList.remove("darkMode");
         document.getElementById("viewModeIcon").classList.add("lightMode");
@@ -53,6 +54,7 @@ document.getElementById("viewModeIcon").addEventListener("click", function(event
         document.documentElement.style.setProperty("--buttons-footer-colour", "hsl(234, 11%, 52%)");
         document.documentElement.style.setProperty("--buttons-hover-colour", "hsl(236, 33%, 92%)");
         document.documentElement.style.setProperty("--border-colour", "hsl(233, 14%, 35%)");
+        document.documentElement.style.setProperty("--box-shadow", "rgb(0 0 0 / 30%)");
         document.getElementById("viewModeIcon").src = "images/icon-sun.svg";
         document.getElementById("viewModeIcon").classList.remove("lightMode");
         document.getElementById("viewModeIcon").classList.add("darkMode");
