@@ -8,6 +8,7 @@ const completedList = document.getElementById("completedList");
 const containers = document.querySelectorAll(".container");
 let itemsActiveArray = [];
 let itemsCompletedArray = [];
+let afterElementMob;
 
 //checks if local storage already exists
 if (localStorage.getItem("itemsActive")) {
@@ -80,6 +81,9 @@ function createItem(inputValue) {
     countItemsLeft();
     itemLabel.addEventListener("dragstart", dragStart);
     itemLabel.addEventListener("dragend", dragEnd);
+    itemLabel.addEventListener("touchstart", touchStart);
+    itemLabel.addEventListener("touchmove", touchMove);
+    itemLabel.addEventListener("touchend", touchEnd);
     return itemLabel;
 }
 
@@ -321,4 +325,38 @@ function getDragAfterElement(container, y) {
             return closest;
         }
     }, { offset: Number.NEGATIVE_INFINITY }).element;
+}
+
+//drag and drop functions for mobile
+function touchStart(event) {
+    event.target.classList.add("dragging");
+}
+
+function touchMove(event) {
+    let draggable = document.querySelector(".dragging");
+    let container;
+    if (draggable.classList.contains("activeItem")) {
+        container = activeList;
+    } else {
+        container = completedList;
+    }
+    afterElementMob = getDragAfterElement(container, event.touches[0].clientY);
+}
+
+function touchEnd(event) {
+    let draggable = document.querySelector(".dragging");
+    if (afterElementMob == null) {
+        if (draggable.classList.contains("activeItem")) {
+            activeList.appendChild(draggable);
+        } else {
+            completedList.appendChild(draggable);
+        }
+    } else {
+        if (draggable.classList.contains("activeItem")) {
+            activeList.insertBefore(draggable, afterElementMob);
+        } else {
+            completedList.insertBefore(draggable, afterElementMob);
+        }    
+    }
+    event.target.classList.remove("dragging");
 }
